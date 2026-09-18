@@ -26,7 +26,8 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:24px;fo
 
 .site{padding:0;display:block}header{position:absolute;top:max(24px,env(safe-area-inset-top));left:max(24px,env(safe-area-inset-left));justify-content:flex-start}header .edition{transition:opacity .15s}main{display:block;padding:0;text-align:center}.hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px max(24px,env(safe-area-inset-right)) 64px max(24px,env(safe-area-inset-left))}.logo-slot{width:min(100%,960px);aspect-ratio:577/117}.logo-slot .home-wordmark{width:100%;margin:0}.scroll-ready .home-wordmark{position:fixed;left:0;top:0;z-index:5;transform-origin:top left;will-change:transform}.logo-dock{position:fixed;top:max(24px,env(safe-area-inset-top));left:max(24px,env(safe-area-inset-left));width:clamp(112px,30vw,180px);height:1px;visibility:hidden;pointer-events:none}.home-slogan{will-change:opacity}.next-section{min-height:100svh;border-top:1px solid rgb(107 164 255 / .25)}footer{padding:24px}body.intro-active{overflow:hidden}@media(min-width:800px){.hero{padding-right:56px;padding-left:56px}.logo-dock{left:56px;top:36px}header{top:36px;left:56px}footer{padding:36px 56px}}
 
-.services{padding:104px 24px 64px;text-align:left;min-height:auto}.services-inner{max-width:1160px;margin:0 auto}.services h2{color:var(--blue);margin:0 0 40px;font-size:clamp(36px,6vw,72px);line-height:1.04;letter-spacing:-.055em;font-weight:800}.service{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;padding:28px 0;border-top:1px solid rgb(25 26 30 / .18)}.service h3{margin:0 0 10px;font-size:clamp(23px,3vw,32px);line-height:1.15;letter-spacing:-.035em}.service-copy p{max-width:540px;margin:0;font-size:15px;line-height:1.6}.service-pricing{display:flex;flex-direction:column;gap:8px}.service-pricing p{margin:0}.service-price{font-size:22px;font-weight:700;letter-spacing:-.035em;line-height:1.4}.service-price span{font-size:14px;font-weight:400;letter-spacing:0}.service-note{font-size:13px;line-height:1.5;color:#505157}.quote-label{font-size:18px;font-weight:700;color:var(--blue)}.service-all{background:var(--blue);color:var(--paper);border:0;padding:28px 24px;margin:24px -24px 0}.service-all .quote-label{color:var(--paper)}.service-all .service-note{color:var(--paper)}
+.services{padding:104px 24px 64px;text-align:left;min-height:auto}.services-inner{max-width:1160px;margin:0 auto}.services h2{color:var(--blue);margin:0 0 40px;font-size:clamp(36px,6vw,72px);line-height:1.04;letter-spacing:-.055em;font-weight:800}.service{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;padding:28px 0;border-top:1px solid rgb(25 26 30 / .18)}.service h3{margin:0 0 10px;font-size:clamp(23px,3vw,32px);line-height:1.15;letter-spacing:-.035em}.service-copy p{max-width:540px;margin:0;font-size:15px;line-height:1.6}.service-pricing{display:flex;flex-direction:column;gap:8px}.service-pricing p{margin:0}.service-price{font-size:22px;font-weight:700;letter-spacing:-.035em;line-height:1.4}.service-price span{font-size:14px;font-weight:400;letter-spacing:0}.service-note{font-size:13px;line-height:1.5;color:#505157}.quote-label{display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;min-height:60px;max-width:100%;padding:16px 28px;border:2px solid var(--blue);border-radius:8px;background:var(--blue);color:var(--paper);font-size:clamp(22px,2.4vw,26px);line-height:1.15;text-align:center;opacity:1}.service-all{background:var(--blue);color:var(--paper);border:0;padding:28px 24px;margin:24px -24px 0}.service-all .quote-label{background:var(--paper);border-color:var(--paper);color:var(--blue)}
+@media(min-width:760px){.quote-label{align-self:flex-end}}.service-all .service-note{color:var(--paper)}
 @media(min-width:760px){.services{padding:120px 56px 88px}.services h2{margin-bottom:56px}.service{grid-template-columns:minmax(0,1.6fr) minmax(230px,1fr);gap:40px;padding:32px 0;align-items:center}.service-pricing{text-align:right}.service-all{padding:36px;margin:24px -36px 0}}
 /* Brand typography: Sunborn headings and CTAs await the supplied web-font file. */
 h1,h2,h3,h4,h5,h6{font-family:"Sunborn",Arial,Helvetica,sans-serif}
@@ -49,15 +50,15 @@ button,.cta,.quote-label,[role="button"],input[type="submit"],input[type="button
 </article>
 <article class="service">
 <div class="service-copy"><h3>Content + Social Management</h3><p>Scripting, captions, scheduling, posting, and account management.<br>Instagram, Facebook, TikTok, and YouTube.</p></div>
-<div class="service-pricing"><p class="quote-label">Get a quote</p></div>
+<div class="service-pricing"><button class="quote-label" type="button" disabled>Get a quote</button></div>
 </article>
 <article class="service">
 <div class="service-copy"><h3>Paid Ads + Google Business Profile</h3><p>Meta and Google Ads. Profile updates, photos, reviews, and reporting.</p></div>
-<div class="service-pricing"><p class="quote-label">Get a quote</p><p class="service-note">Ad spend separate.</p></div>
+<div class="service-pricing"><button class="quote-label" type="button" disabled>Get a quote</button><p class="service-note">Ad spend separate.</p></div>
 </article>
 <article class="service service-all">
 <div class="service-copy"><h3>All-in-One</h3><p>Videography, social management, ads, and Google Business Profile management. All together.</p></div>
-<div class="service-pricing"><p class="quote-label">Get a quote</p><p class="service-note">Ad spend separate.</p></div>
+<div class="service-pricing"><button class="quote-label" type="button" disabled>Get a quote</button><p class="service-note">Ad spend separate.</p></div>
 </article>
 </div>
 </section></main>
