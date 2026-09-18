@@ -74,11 +74,8 @@ async function activate(){
  window.scrollTo({top:0,behavior:'instant'});paintScroll();document.body.classList.add('intro-active');resetSlogan();const token=++run;intro.setAttribute('aria-hidden','false');skip.tabIndex=0;site.inert=true;timer=setTimeout(finish,4200);
  effects=document.createElement('div');effects.className='firework-effects';effects.setAttribute('aria-hidden','true');document.body.append(effects);
  const rect=mark.getBoundingClientRect(),unit=intro.querySelector('svg').getBoundingClientRect().width/315;
- const x=rect.left+rect.width/2,y=rect.top+rect.height/2,targetY=Math.max(64,innerHeight*.15),distance=Math.max(50,y-targetY),hop=22/unit;
+ const x=rect.left+rect.width/2,y=rect.top+rect.height/2,targetY=Math.max(64,innerHeight*.15),distance=Math.max(50,y-targetY);
  try{
-  // Three equal 360ms hops. The original SVG placement stays on the inner group.
-  await animate(mark,[{transform:'translateY(0)',easing:'cubic-bezier(.2,.7,.35,1)'},{transform:`translateY(${-hop}px)`,offset:.5,easing:'cubic-bezier(.65,0,.8,.3)'},{transform:'translateY(0)'}],{duration:360,iterations:3,delay:180,fill:'forwards'}).finished;
-  if(token!==run)return;
   const trail=effect('air-trail',x,y);trail.style.height=Math.max(90,distance*.65)+'px';
   animate(trail,[{transform:'translate(-50%,0) scaleY(.08)',opacity:0},{opacity:.85,offset:.2},{transform:`translate(-50%,${-distance}px) scaleY(1)`,opacity:0}],{duration:260,easing:'cubic-bezier(.65,0,1,.35)',fill:'forwards'});
   [-1,1].forEach((side)=>{const cut=effect('air-cut',x+side*(rect.width/2+8),y-10);animate(cut,[{transform:'translateY(0) scaleY(.3)',opacity:0},{opacity:.65,offset:.25},{transform:`translateY(${-distance}px) scaleY(1.6)`,opacity:0}],{duration:260,fill:'forwards'})});
