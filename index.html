@@ -13,7 +13,7 @@
 header{display:flex;align-items:center;justify-content:space-between;gap:20px}.wordmark{font-size:26px;font-weight:900;letter-spacing:-1.5px}.wordmark span{color:var(--blue)}.edition{font-size:12px;letter-spacing:.12em;text-transform:uppercase}
 main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 0;text-align:center}.home-logo{width:clamp(120px,20vw,210px)}.brand-mark{width:100%;height:auto;display:block;overflow:visible}h1{font-size:clamp(44px,8vw,112px);font-weight:800;line-height:1;letter-spacing:-.055em;margin:32px 0 0}h1 span{color:var(--blue)}
 footer{display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:14px}.replay,.skip{border:0;background:transparent;color:inherit;min-height:48px;padding:12px 0;cursor:pointer}.replay{border-bottom:1px solid currentColor}.replay:hover{color:var(--blue)}
-.intro{position:fixed;inset:0;z-index:10;background:var(--paper);display:grid;place-items:center;overflow:hidden;visibility:hidden;pointer-events:none}.intro-logo{width:clamp(145px,32vw,260px);}.skip{position:absolute;right:max(24px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));font-size:14px}.intro.running{visibility:visible;pointer-events:auto}.apostrophe-motion{transform-box:view-box;transform-origin:0 0;will-change:transform}.site.revealing{position:relative;z-index:11}.firework-effects{position:fixed;inset:0;pointer-events:none;z-index:12;overflow:hidden}.spark{position:absolute;width:3px;height:18px;background:var(--blue);border-radius:3px;transform-origin:center;will-change:transform,opacity}.air-trail{position:absolute;width:30px;transform:translateX(-50%);background:linear-gradient(to top,transparent,#6ba4ff 65%,#0066ff);clip-path:polygon(48% 0,55% 0,100% 100%,0 100%);opacity:.75}.air-cut{position:absolute;width:2px;height:80px;background:linear-gradient(transparent,#191a1e,transparent)}.burst-ring{position:absolute;width:12px;height:12px;border:2px solid var(--blue);border-radius:50%;transform:translate(-50%,-50%)}
+.intro{position:fixed;inset:0;z-index:10;background:var(--paper);display:grid;place-items:center;overflow:hidden;visibility:hidden;pointer-events:none}.intro-logo{width:clamp(145px,32vw,260px);}.skip{position:absolute;right:max(24px,env(safe-area-inset-right));bottom:max(24px,env(safe-area-inset-bottom));font-size:14px}.intro.running{visibility:visible;pointer-events:auto}.apostrophe-motion{transform-box:view-box;transform-origin:0 0;will-change:transform}.site.revealing{position:relative;z-index:11}.firework-effects{position:fixed;inset:0;pointer-events:none;z-index:12;overflow:hidden}.air-trail{position:absolute;width:30px;transform:translateX(-50%);background:linear-gradient(to top,transparent,#6ba4ff 65%,#0066ff);clip-path:polygon(48% 0,55% 0,100% 100%,0 100%);opacity:.75}.air-cut{position:absolute;width:2px;height:80px;background:linear-gradient(transparent,#191a1e,transparent)}.blast-wave{position:absolute;border-radius:50%;transform-origin:center;will-change:transform;background:radial-gradient(circle closest-side,transparent 89%,rgb(107 164 255 / .12) 91%,rgb(0 102 255 / .55) 93%,#f6f1e6 94%,#6ba4ff 94.6%,#0066ff 96%,rgb(0 102 255 / .65) 97%,rgb(107 164 255 / .18) 99%,transparent 100%)}
 @media(min-width:800px){.site{padding:36px 56px}.skip{right:56px;bottom:36px}}@media(max-width:380px){.edition{font-size:11px;letter-spacing:.04em}footer{gap:12px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}.intro.running{display:none}}
 </style>
@@ -47,10 +47,18 @@ async function activate(){
   [-1,1].forEach((side)=>{const cut=effect('air-cut',x+side*(rect.width/2+8),y-10);animate(cut,[{transform:'translateY(0) scaleY(.3)',opacity:0},{opacity:.65,offset:.25},{transform:`translateY(${-distance}px) scaleY(1.6)`,opacity:0}],{duration:260,fill:'forwards'})});
   await animate(mark,[{transform:'translateY(0)'},{transform:`translateY(${-distance/unit}px)`}],{duration:260,easing:'cubic-bezier(.65,0,1,.35)',fill:'forwards'}).finished;
   if(token!==run)return;mark.style.visibility='hidden';
-  for(let i=0;i<24;i++){const angle=i*Math.PI*2/24,reach=Math.min(innerWidth*.45,190)*(i%2?.72:1),spark=effect('spark',x,targetY);spark.style.background=i%3?'#0066ff':'#191a1e';animate(spark,[{transform:`translate(-50%,-50%) rotate(${angle}rad) scaleY(.3)`,opacity:1},{transform:`translate(calc(-50% + ${Math.sin(angle)*reach}px),calc(-50% + ${Math.cos(angle)*reach}px)) rotate(${angle}rad) scaleY(.7)`,opacity:0}],{duration:580,easing:'cubic-bezier(.16,1,.3,1)',fill:'forwards'})}
-  const ring=effect('burst-ring',x,targetY);animate(ring,[{transform:'translate(-50%,-50%) scale(1)',opacity:.8},{transform:'translate(-50%,-50%) scale(22)',opacity:0}],{duration:500,easing:'ease-out',fill:'forwards'});
-  site.classList.add('revealing');const radius=Math.hypot(Math.max(x,innerWidth-x),Math.max(targetY,innerHeight-targetY));
-  await animate(site,[{clipPath:`circle(0px at ${x}px ${targetY}px)`},{clipPath:`circle(${radius}px at ${x}px ${targetY}px)`}],{duration:650,easing:'cubic-bezier(.2,.7,.2,1)',fill:'forwards'}).finished;
+  // One shared timeline keeps the revealed homepage exactly inside the blast edge.
+  const edge=.94;
+  const radius=(Math.hypot(Math.max(x,innerWidth-x),Math.max(targetY,innerHeight-targetY))+24)/.89;
+  const wave=effect('blast-wave',x-radius,targetY-radius);
+  wave.style.width=wave.style.height=2*radius+'px';
+  const timing={duration:420,easing:'cubic-bezier(.12,.72,.16,1)',fill:'forwards'};
+  site.classList.add('revealing');
+  const reveal=animate(site,[{clipPath:`circle(0px at ${x}px ${targetY}px)`},{clipPath:`circle(${radius*edge}px at ${x}px ${targetY}px)`}],timing);
+  const blast=animate(wave,[{transform:'scale(0)'},{transform:'scale(1)'}],timing);
+  // Explicitly synchronize both animations, including their very first frame.
+  const start=document.timeline.currentTime;reveal.startTime=start;blast.startTime=start;
+  await reveal.finished;
   if(token===run)finish();
  }catch(error){if(token===run)finish()}
 }
