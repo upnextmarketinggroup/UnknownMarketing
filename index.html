@@ -28,10 +28,10 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:24px;fo
 </div>
 <script>
 const intro=document.querySelector('.intro'),site=document.querySelector('.site'),skip=document.querySelector('.skip'),replay=document.querySelector('.replay'),motion=matchMedia('(prefers-reduced-motion: reduce)');
-const mark=intro.querySelector('.apostrophe-motion');
+const mark=intro.querySelector('.apostrophe-motion'),introLogo=intro.querySelector('.intro-logo');
 let timer,wasReplay=false,run=0,animations=[],effects;
 function animate(el,frames,options){const animation=el.animate(frames,options);animations.push(animation);return animation}
-function finish(){run++;clearTimeout(timer);clearTimeout(window.introFailsafe);intro.classList.remove('running');intro.setAttribute('aria-hidden','true');skip.tabIndex=-1;site.inert=false;site.classList.remove('revealing');animations.forEach(a=>a.cancel());animations=[];effects?.remove();mark.style.visibility='';if(wasReplay||document.activeElement===skip)replay.focus({preventScroll:true});wasReplay=false}
+function finish(){run++;clearTimeout(timer);clearTimeout(window.introFailsafe);intro.classList.remove('running');intro.setAttribute('aria-hidden','true');skip.tabIndex=-1;site.inert=false;site.classList.remove('revealing');animations.forEach(a=>a.cancel());animations=[];effects?.remove();mark.style.visibility='';introLogo.style.visibility='';if(wasReplay||document.activeElement===skip)replay.focus({preventScroll:true});wasReplay=false}
 function effect(className,x,y){const el=document.createElement('i');el.className=className;el.style.left=x+'px';el.style.top=y+'px';effects.append(el);return el}
 async function activate(){
  const token=++run;intro.setAttribute('aria-hidden','false');skip.tabIndex=0;site.inert=true;timer=setTimeout(finish,4200);
@@ -46,7 +46,7 @@ async function activate(){
   animate(trail,[{transform:'translate(-50%,0) scaleY(.08)',opacity:0},{opacity:.85,offset:.2},{transform:`translate(-50%,${-distance}px) scaleY(1)`,opacity:0}],{duration:260,easing:'cubic-bezier(.65,0,1,.35)',fill:'forwards'});
   [-1,1].forEach((side)=>{const cut=effect('air-cut',x+side*(rect.width/2+8),y-10);animate(cut,[{transform:'translateY(0) scaleY(.3)',opacity:0},{opacity:.65,offset:.25},{transform:`translateY(${-distance}px) scaleY(1.6)`,opacity:0}],{duration:260,fill:'forwards'})});
   await animate(mark,[{transform:'translateY(0)'},{transform:`translateY(${-distance/unit}px)`}],{duration:260,easing:'cubic-bezier(.65,0,1,.35)',fill:'forwards'}).finished;
-  if(token!==run)return;mark.style.visibility='hidden';
+  if(token!==run)return;mark.style.visibility='hidden';introLogo.style.visibility='hidden';
   // One shared timeline keeps the revealed homepage exactly inside the blast edge.
   const edge=.94;
   const radius=(Math.hypot(Math.max(x,innerWidth-x),Math.max(targetY,innerHeight-targetY))+24)/.89;
