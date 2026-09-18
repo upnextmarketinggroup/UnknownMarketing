@@ -6,8 +6,11 @@
 <meta name="theme-color" content="#f6f1e6">
 <meta name="description" content="Brand Better. Be the one they remember.">
 <title>Brandem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Antic&amp;display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light;--paper:#f6f1e6;--ink:#191a1e;--blue:#0066ff;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper)}
+:root{color-scheme:light;--paper:#f6f1e6;--ink:#191a1e;--blue:#0066ff;font-family:"Antic",Arial,sans-serif;color:var(--ink);background:var(--paper)}
 *{box-sizing:border-box}body{margin:0}button{font:inherit}button:focus-visible{outline:3px solid var(--blue);outline-offset:6px}
 .site{min-height:100svh;display:flex;flex-direction:column;padding:max(24px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}
 header{display:flex;align-items:center;justify-content:space-between;gap:20px}.wordmark{font-size:26px;font-weight:900;letter-spacing:-1.5px}.wordmark span{color:var(--blue)}.edition{font-size:12px;letter-spacing:.12em;text-transform:uppercase}
@@ -25,6 +28,10 @@ footer{display:flex;justify-content:space-between;align-items:center;gap:24px;fo
 
 .services{padding:104px 24px 64px;text-align:left;min-height:auto}.services-inner{max-width:1160px;margin:0 auto}.services h2{color:var(--blue);margin:0 0 40px;font-size:clamp(36px,6vw,72px);line-height:1.04;letter-spacing:-.055em;font-weight:800}.service{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;padding:28px 0;border-top:1px solid rgb(25 26 30 / .18)}.service h3{margin:0 0 10px;font-size:clamp(23px,3vw,32px);line-height:1.15;letter-spacing:-.035em}.service-copy p{max-width:540px;margin:0;font-size:15px;line-height:1.6}.service-pricing{display:flex;flex-direction:column;gap:8px}.service-pricing p{margin:0}.service-price{font-size:22px;font-weight:700;letter-spacing:-.035em;line-height:1.4}.service-price span{font-size:14px;font-weight:400;letter-spacing:0}.service-note{font-size:13px;line-height:1.5;color:#505157}.quote-label{font-size:18px;font-weight:700;color:var(--blue)}.service-all{background:var(--blue);color:var(--paper);border:0;padding:28px 24px;margin:24px -24px 0}.service-all .quote-label{color:var(--paper)}.service-all .service-note{color:var(--paper)}
 @media(min-width:760px){.services{padding:120px 56px 88px}.services h2{margin-bottom:56px}.service{grid-template-columns:minmax(0,1.6fr) minmax(230px,1fr);gap:40px;padding:32px 0;align-items:center}.service-pricing{text-align:right}.service-all{padding:36px;margin:24px -36px 0}}
+/* Brand typography: Sunborn headings await the supplied web-font file. */
+h1,h2,h3,h4,h5,h6{font-family:"Sunborn",Arial,Helvetica,sans-serif}
+.home-slogan,.slogan-first,.slogan-second,.service-copy p,.service-pricing,footer,.edition,button{font-family:"Antic",Arial,sans-serif;font-weight:400;letter-spacing:normal}
+.service-price,.quote-label{font-weight:400}
 </style>
 </head>
 <body>
