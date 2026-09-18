@@ -68,7 +68,6 @@ function typeSlogan(){
 }
 // A full-color copy reveals diagonally over the desaturated original.
 const introSvg=introLogo.querySelector('svg');
-introSvg.querySelectorAll('[fill="#191a1e"],[fill="#000000"]').forEach(el=>el.setAttribute('fill','#0066ff'));
 let colorFill;
 function resetFill(){colorFill?.remove();colorFill=null;introSvg.style.filter=''}
 async function fillIcon(){
