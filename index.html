@@ -35,7 +35,7 @@ h1,h2,h3,h4,h5,h6{font-family:"Sunborn",Arial,Helvetica,sans-serif}
 .home-slogan,.slogan-first,.slogan-second,.service-copy p,.service-pricing,footer,.edition{font-family:"Antic",Arial,sans-serif;font-weight:400;letter-spacing:normal}
 .service-price{font-weight:400}
 button,.cta,.quote-label,[role="button"],input[type="submit"],input[type="button"]{font-family:"Sunborn",Arial,Helvetica,sans-serif;font-weight:400;letter-spacing:normal}
-.service-copy .work-link{max-width:none;margin:28px 0 0;text-align:right;font-family:"Sunborn",Arial,Helvetica,sans-serif;font-size:18px;font-weight:400;line-height:1.4;letter-spacing:normal;color:#6ba4ff;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.service-description-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 20px}.service-description-row>p{max-width:none}.service-copy .work-link{margin:0;white-space:nowrap;text-align:left;font-family:"Sunborn",Arial,Helvetica,sans-serif;font-size:18px;font-weight:400;line-height:1.4;letter-spacing:normal;color:#6ba4ff;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
 /* Reserve a dedicated, opaque navigation bar above every section. */
 :root{--header-height:88px}
 html{scroll-padding-top:calc(var(--header-height) + 24px)}
@@ -68,7 +68,7 @@ a:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
 <div class="services-inner">
 <h2 id="services-heading" aria-label="Services"><span aria-hidden="true">Se<span class="services-rv-gap">r</span>vices</span></h2>
 <article class="service">
-<div class="service-copy"><h3>Videography</h3><p>From one video to a full month of content. Editing included.</p><p class="work-link">See Our Work</p></div>
+<div class="service-copy"><h3>Videography</h3><div class="service-description-row"><p>From one video to a full month of content. Editing included.</p><p class="work-link">See Our Work</p></div></div>
 <div class="service-pricing"><p class="service-price">$100–$250 <span>/ video</span></p><p class="service-note">Based on the video and location.</p><p class="service-price">$1,500 <span>/ month</span></p><p class="service-note">20 hours of shooting. Editing included.</p></div>
 </article>
 <article class="service">
